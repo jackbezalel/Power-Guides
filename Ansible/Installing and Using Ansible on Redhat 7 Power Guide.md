@@ -1,8 +1,8 @@
-#Installing and Using Ansible on Redhat 7 Power Guide
+# Installing and Using Ansible on Redhat 7 Power Guide
 
-#RESOURCE: http://docs.ansible.com/intro_installation.html
+##### #*RESOURCE: http://docs.ansible.com/intro_installation.html*
 
-#OnMaster #TODO: Install the control machine (no need for DB or agents at all)
+##### #OnMaster #TODO: Install the control machine (no need for DB or agents at all)
 
 	sudo easy_install pip
 
