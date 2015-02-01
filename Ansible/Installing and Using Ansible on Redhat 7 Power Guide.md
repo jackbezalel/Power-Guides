@@ -9,7 +9,7 @@
 	sudo pip install ansible
 
 
-#OnSLAVES #TODO: Install Python 2.6 or supported newer on Controlled Machines or compile from source as described here
+##### #OnSLAVES #TODO: Install Python 2.6 or supported newer on Controlled Machines or compile from source as described here
 
 	#Failed: Failed installing on REDHAT EL4 (even with EPEL repository)
 	# Tried to setup pip to install Python since EL4's latest python is v2.3.x
@@ -36,7 +36,7 @@
 	# _sqlite3           bsddb185           sunaudiodev
 	# To find the necessary bits, look in setup.py in detect_modules() for the module's name.
 
-#OnMaster #OnSLAVES #TODO: create ansible user ON ALL MACHINES
+##### #OnMaster #OnSLAVES #TODO: create ansible user ON ALL MACHINES
 
 	useradd ansible
 
@@ -44,7 +44,7 @@
 
 	echo "ansible ALL=(ALL) ALL" >> /etc/sudoers
 
-#TODO: #onMaster
+##### #TODO: #onMaster
 
 	mkdir /etc/ansible/
 
@@ -59,7 +59,15 @@
 	su - ansible
 	ssh-keygen # decide about the password for your ansible user cert file
 
-	# Copy the contents of #MASTER ~ansible/.ssh/id_rsa.pub into each controlled machine's ~ansible/.ssh/authorized_keys
+##### #TODO: #onSlaves
+
+	su - ansible
+	mkdir -p ~ansible/.ssh # create .ssh directory if does not exist yet
+	touch ~ansible/.ssh/authorized_keys # create trusted authorized_keys file if does not exist yet
+	chmod 600 ~ansible/.ssh/authorized_keys # set proper permissions just in case
+	# "cat" the contents of #MASTER ~ansible/.ssh/id_rsa.pub into each controlled machine's ~ansible/.ssh/authorized_keys
+
+##### #OnMaster #TODO: Verify connection to Slaves
 
 	# Test connection using ssh
 
