@@ -78,12 +78,34 @@
 	# Test connection via ansible
 
 	ansible controlled1 -m ping
+	# Enter passphrase for key '/home/ansible/.ssh/id_rsa':
 
+	# controlled1 | success >> {
+    # "changed": false,
+    # "ping": "pong"
+	# }
 
 	#NOTE It looks like ansible will "cache" the cert password for future invocations (persistent across logout and re-login, and fades away only after reboot)
 
-	# To avoid entering the password you can use "ssh-agent" and "ssh-add"
+	# To avoid entering the password for each SLAVE machine, you can use "ssh-agent" and "ssh-add"
 
-	#
+	ssh-agent -t 20  # set the agent so that the key you add expires in 20 seconds
 
-	
+	# Record the output of the ssh-agent command, copy and paste it:
+
+	# Sample output:
+	# SSH_AUTH_SOCK=/tmp/ssh-hjhHYbjjj/agent.8888; export SSH_AUTH_SOCK;
+	# SSH_AGENT_PID=8888; export SSH_AGENT_PID;
+	# echo Agent pid 8888;
+
+	# Now add you key - default will refer to ~ansible/.ssh/id_rsa in our case
+
+	ssh-add
+
+	# Sample output:
+	# Enter passphrase for /home/ansible/.ssh/id_rsa:
+	# Identity added: /home/ansible/.ssh/id_rsa (/home/ansible/.ssh/id_rsa)
+
+	# Now you can ssh or ansible the SLAVES without entering the key password:
+
+	ansible controlled1 -m ping
